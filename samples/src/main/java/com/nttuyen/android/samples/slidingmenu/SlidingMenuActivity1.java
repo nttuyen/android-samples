@@ -1,25 +1,24 @@
-package com.nttuyen.android.samples;
+package com.nttuyen.android.samples.slidingmenu;
 
-import android.app.Activity;
-import android.content.Intent;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import com.nttuyen.android.samples.slidingmenu.SlidingMenuActivity1;
-import com.nttuyen.android.samples.slidingmenu.SlidingMenuSample;
+import com.nttuyen.android.samples.R;
 import com.nttuyen.android.umon.widget.SlidingMenu;
 
-
-public class MainActivity extends ActionBarActivity {
+public class SlidingMenuActivity1 extends ActionBarActivity {
 
     private SlidingMenu menu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.sliding_menu_activity1);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -30,6 +29,11 @@ public class MainActivity extends ActionBarActivity {
         menu.setContentView(text);
         menu.attachTo(this);
         menu.setDrawerImageResource(R.drawable.ic_drawer);
+
+        //. Change width
+        //Display display = getWindowManager().getDefaultDisplay();
+        //int screenWidth = display.getWidth();
+        //menu.setWidth(screenWidth * 2 / 3);
     }
 
     @Override
@@ -38,10 +42,11 @@ public class MainActivity extends ActionBarActivity {
         menu.syncState();
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.sliding_menu_activity1, menu);
         return true;
     }
 
@@ -50,7 +55,7 @@ public class MainActivity extends ActionBarActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        if(menu.onOptionsItemSelected(item)) {
+        if (menu.onOptionsItemSelected(item)) {
             return true;
         }
 
@@ -62,16 +67,6 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void onClick(View v) {
-        if(v.getId() == R.id.btn_sliding_menu_activity) {
-            go(SlidingMenuSample.class);
-        }
-        if(v.getId() == R.id.btn_sliding_menu_activity1) {
-            go(SlidingMenuActivity1.class);
-        }
-    }
-
-    public void go(Class<? extends Activity> c) {
-        Intent intent = new Intent(this, c);
-        startActivity(intent);
+        this.menu.toggle();
     }
 }

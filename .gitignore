@@ -1,11 +1,6 @@
-.gradle
-build/
-
-# Ignore Gradle GUI config
-gradle-app.setting
-local.properties
-
-#IntelliJ
+# Created by .gitignore support plugin (hsz.mobi)
 .idea
-.impl
 *.iml
+.gradle
+build
+local.properties
